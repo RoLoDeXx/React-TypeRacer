@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+* {
+  font-family: open Sans;
+  font-weight: 100;
+  text-align: center;
+}
+
+.infoText {
+  font-size: 1.15rem;
+}
+
+.div1 {
+  background: transparent;
+  margin: 1rem auto;
+  padding: 0.5rem 10px;
+  width: 70%;
+}
+
+.targetText {
+  color: white;
+  font-size: 2.75rem;
+}
+
+input[type="text"] {
+  font-size: 1.25rem;
+  border: none;
+  border-bottom: 2px solid #f0db4f;
+  border-radius: 5px;
+  margin: 2rem;
+  width: 70%;
+  outline: none;
+  padding: 0.5rem 10px;
+}
+
+button {
+  background: #f0db4f;
+  color: black;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  outline: none;
+  transition: 0.5s;
+  margin: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.21rem;
+}
+
+button:hover {
+  background: white;
+  color: #f0db4f;
+}
+
+.score {
+  background: white;
+  width: 70%;
+  padding: 0.5rem 10px;
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.timer {
+  color: white;
+}

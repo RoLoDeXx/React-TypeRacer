@@ -28,7 +28,7 @@ input[type="text"] {
   border-bottom: 2px solid #f0db4f;
   border-radius: 5px;
   margin: 2rem;
-  width: 70%;
+  width: 30rem;
   outline: none;
   padding: 0.5rem 10px;
 }
@@ -50,18 +50,36 @@ button {
 
 button:hover {
   background: white;
-  color: #f0db4f;
+  color: black;
 }
 
 .score {
-  background: white;
-  width: 70%;
+  background: #f0db4f;
+  width: 30rem;
   padding: 0.5rem 10px;
   margin: auto;
   border-radius: 5px;
   text-align: center;
 }
 
+.score p {
+  font-size: 1.25rem;
+}
+
 .timer {
   color: white;
+  font-size: 1.5rem;
+  margin-left: 25rem;
+}
+
+@media screen and (max-width: 500px) {
+  input[type="text"],
+  .div1,
+  .score {
+    width: 70%;
+  }
+
+  .timer {
+    margin-left: 55%;
+  }
 }

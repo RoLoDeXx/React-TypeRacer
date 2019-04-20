@@ -41,6 +41,7 @@ export default class Main extends Component {
     if (this.state.targetText === this.state.inputText) {
       this.stopTimer();
       this.setState({
+        inputText: "",
         completed: 1
       });
     }
@@ -69,9 +70,7 @@ export default class Main extends Component {
       <div>
         <div className="div1">
           {this.state.targetText === "" ? (
-            <p className="targetText">
-              Click on start or press enter to begin!
-            </p>
+            <p className="targetText">Click on start to begin!</p>
           ) : (
             <p className="targetText">{this.state.targetText}</p>
           )}
@@ -91,7 +90,7 @@ export default class Main extends Component {
               }}
             />
             <br />
-            <button onClick={this.newGame}>Start</button>
+            <button onClick={this.newGame}>TypeRace</button>
           </form>
         </div>
 

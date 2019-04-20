@@ -4,6 +4,7 @@ import "./styles/Main.css";
 export default class Main extends Component {
   constructor() {
     super();
+    this.textInput = React.createRef();
     this.state = {
       time: 0,
       targetText: "",
@@ -62,6 +63,7 @@ export default class Main extends Component {
       completed: 0
     });
     this.startTimer();
+    this.textInput.current.focus();
   };
 
   render() {
@@ -88,6 +90,7 @@ export default class Main extends Component {
               onKeyPress={e => {
                 if (e.key === "Enter") e.preventDefault();
               }}
+              ref={this.textInput}
             />
             <br />
             <button onClick={this.newGame}>TypeRace</button>
@@ -96,7 +99,6 @@ export default class Main extends Component {
 
         <div>
           <p className="timer">Time : {this.state.time}</p>
-
           {this.state.completed ? (
             <ScoreCard length={strLength} time={this.state.time} />
           ) : (

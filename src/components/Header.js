@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <div>
-      <header>
+      <header className="neutral">
         <h1>TypeSpeed ⌨</h1>
       </header>
     </div>

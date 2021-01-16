@@ -1,8 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 header {
-  background: #f0db4f;
   padding: 1rem 0;
+}
+
+.neutral {
+  background: #f0db4f;
+}
+
+.success {
+  background: #03c74e !important;
+}
+
+.error {
+  background: #fd3a20;
 }
 
 h1 {

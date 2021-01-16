@@ -5,15 +5,18 @@ import axios from "axios";
 
 const Main = () => {
   const [showInstructions, setShowInstructions] = useState(true);
-  const [time, setTime] = useState(0);
   const [query, setQuery] = useState("");
   const [target, setTarget] = useState("");
   const [stash, setStash] = useState([]);
 
+  let time;
+  let timeoutId;
+  let colorBlocks = document.querySelectorAll(".neutral");
+
   useEffect(() => {
     let loadQuotes = async () => {
       let res = await axios.get(
-        "https://api.jsonbin.io/b/600283cbe31fbc3bdef44bca",
+        "https://api.jsonbin.io/b/600283cbe31fbc3bdef44bca/1",
         {
           headers: {
             "secret-key":
@@ -28,10 +31,27 @@ const Main = () => {
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    if (query === target.slice(0, query.length)) {
-      console.log("match");
-      if (query.length === target.length) alert("finish");
-    } else console.log("mis");
+
+    if (query === target.slice(0, query.length) && query.length !== 0) {
+      colorBlocks.forEach((block) => block.classList.add("error", "success"));
+      if (query.length === target.length) {
+        clearInterval(timeoutId);
+        setShowInstructions(false);
+      }
+    } else colorBlocks.forEach((block) => block.classList.remove("success"));
+  };
+
+  const startGame = () => {
+    setShowInstructions(true);
+    setQuery("");
+    time = 0;
+    colorBlocks.forEach((block) => block.classList.remove("success", "error"));
+
+    let indx = Math.floor(Math.random() * 102);
+    setTarget(stash[indx].quote);
+    timeoutId = setInterval(() => {
+      ++time;
+    }, 1000);
   };
 
   return (
@@ -52,21 +72,19 @@ const Main = () => {
             autoComplete="off"
             value={query}
             onChange={(e) => handleChange(e)}
+            disabled={target === ""}
           />
           <br />
-          <button
-            onClick={() => {
-              let indx = Math.floor(Math.random() * 102);
-              setTarget(stash[indx].quote);
-            }}
-          >
+          <button onClick={startGame} className="neutral">
             TypeRace
           </button>
         </div>
 
-        <div>
-          <ScoreCard showInstructions={true} />
-        </div>
+        <ScoreCard
+          showInstructions={showInstructions}
+          time={time}
+          length={target.split(" ").length + 1}
+        />
       </div>
     </div>
   );

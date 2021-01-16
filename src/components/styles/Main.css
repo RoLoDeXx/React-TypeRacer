@@ -25,7 +25,6 @@
 input[type="text"] {
   font-size: 1.25rem;
   border: none;
-  border-bottom: 2px solid #f0db4f;
   border-radius: 5px;
   margin: 2rem;
   width: 30rem;
@@ -34,7 +33,6 @@ input[type="text"] {
 }
 
 button {
-  background: #f0db4f;
   color: black;
   font-size: 1rem;
   border: none;
@@ -54,7 +52,6 @@ button:hover {
 }
 
 .score {
-  background: #f0db4f;
   width: 30rem;
   padding: 0.5rem 10px;
   margin: auto;

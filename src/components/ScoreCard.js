@@ -1,7 +1,7 @@
 import React from "react";
 export default function ScoreCard(props) {
   return (
-    <div className="score">
+    <div className="score neutral">
       {props.showInstructions ? (
         <div>
           <h1>Instructions</h1>
@@ -14,7 +14,7 @@ export default function ScoreCard(props) {
         <p>
           Time : {props.time} Seconds
           <br />
-          Speed : {props.length / (props.time / 60)} Wpm
+          Speed : {props.length / props.time} Wps
         </p>
       )}
     </div>

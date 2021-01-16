@@ -1,111 +1,73 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import ScoreCard from "./ScoreCard";
 import "./styles/Main.css";
-export default class Main extends Component {
-  constructor() {
-    super();
-    this.textInput = React.createRef();
-    this.state = {
-      time: 0,
-      targetText: "",
-      inputText: "",
-      quotes: []
+import axios from "axios";
+
+const Main = () => {
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [time, setTime] = useState(0);
+  const [query, setQuery] = useState("");
+  const [target, setTarget] = useState("");
+  const [stash, setStash] = useState([]);
+
+  useEffect(() => {
+    let loadQuotes = async () => {
+      let res = await axios.get(
+        "https://api.jsonbin.io/b/600283cbe31fbc3bdef44bca",
+        {
+          headers: {
+            "secret-key":
+              "$2b$10$1q4xcPv054Qnrnvown8jDuKUPr93vTA4P1k7MaDwXdbkoNdGSRp7a",
+          },
+        }
+      );
+      setStash(res.data);
     };
-  }
+    loadQuotes();
+  }, []);
 
-  componentDidMount() {
-    fetch("https://api.myjson.com/bins/18o5yk")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          quotes: data
-        });
-      });
-  }
-
-  startTimer = () => {
-    this.timer = setInterval(
-      () => this.setState(prevState => ({ time: prevState.time + 1 })),
-      1000
-    );
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    if (query.trim() === target.trim() && target !== "")
+      alert("Hooray ye hai bablu style");
   };
 
-  stopTimer = () => {
-    clearInterval(this.timer);
-  };
-
-  onChange = feild => {
-    this.setState({
-      [feild.target.name]: feild.target.value
-    });
-
-    if (this.state.targetText === this.state.inputText) {
-      this.stopTimer();
-      this.setState({
-        inputText: "",
-        completed: 1
-      });
-    }
-  };
-
-  newGame = feild => {
-    this.stopTimer();
-    this.setState({
-      time: 0
-    });
-    feild.preventDefault();
-    const randNum = Math.floor(Math.random() * this.state.quotes.length);
-    let randQuote = this.state.quotes[randNum].body;
-    randQuote = randQuote.trim();
-    this.setState({
-      targetText: randQuote,
-      inputText: "",
-      completed: 0
-    });
-    this.startTimer();
-    this.textInput.current.focus();
-  };
-
-  render() {
-    let strLength = this.state.targetText.split(" ").length;
-    return (
+  return (
+    <div>
       <div>
         <div className="div1">
-          {this.state.targetText === "" ? (
+          {target === "" ? (
             <p className="targetText">Click on start to begin!</p>
           ) : (
-            <p className="targetText">{this.state.targetText}</p>
+            <p className="targetText">{target}</p>
           )}
         </div>
 
         <div className="typeForm">
-          <form>
-            <input
-              type="text"
-              placeholder="Start typing here..."
-              name="inputText"
-              autoComplete="off"
-              value={this.state.inputText}
-              onChange={this.onChange}
-              onKeyPress={e => {
-                if (e.key === "Enter") e.preventDefault();
-              }}
-              ref={this.textInput}
-            />
-            <br />
-            <button onClick={this.newGame}>TypeRace</button>
-          </form>
+          <input
+            type="text"
+            placeholder="Start typing here..."
+            autoComplete="off"
+            value={query}
+            onChange={(e) => handleChange(e)}
+          />
+          <br />
+          <button
+            onClick={() => {
+              let indx = Math.floor(Math.random() * 102);
+              setTarget(stash[indx].quote);
+            }}
+          >
+            TypeRace
+          </button>
         </div>
 
         <div>
-          <p className="timer">Time : {this.state.time}</p>
-          {this.state.completed ? (
-            <ScoreCard length={strLength} time={this.state.time} />
-          ) : (
-            <ScoreCard Help={1} />
-          )}
+          <ScoreCard showInstructions={true} />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Main;

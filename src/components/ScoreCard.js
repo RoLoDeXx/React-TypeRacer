@@ -2,7 +2,7 @@ import React from "react";
 export default function ScoreCard(props) {
   return (
     <div className="score">
-      {props.Help ? (
+      {props.showInstructions ? (
         <div>
           <h1>Instructions</h1>
           <p>

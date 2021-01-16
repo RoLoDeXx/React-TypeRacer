@@ -28,8 +28,10 @@ const Main = () => {
 
   const handleChange = (e) => {
     setQuery(e.target.value);
-    if (query.trim() === target.trim() && target !== "")
-      alert("Hooray ye hai bablu style");
+    if (query === target.slice(0, query.length)) {
+      console.log("match");
+      if (query.length === target.length) alert("finish");
+    } else console.log("mis");
   };
 
   return (

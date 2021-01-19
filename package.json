@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/react": "^11.2.3",
     "axios": "^0.21.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

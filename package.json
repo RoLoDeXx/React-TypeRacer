@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@testing-library/react": "^11.2.3",
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
